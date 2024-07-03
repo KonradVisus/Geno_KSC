@@ -13,6 +13,10 @@ input_dirs: Dict[str, str] = json.load(open("config.json", encoding="UTF-8"))[
     "INPUT_DIRS"
 ]
 
+archive_dirs: Dict[str, str] = json.load(open("config.json", encoding="UTF-8"))[
+    "ARCHIVE_DIRS"
+]
+
 sources = ["Mail Order", "Mail Service", "Kunden Korrespondenz", "VAK"]
 
 if __name__ == "__main__":
@@ -49,17 +53,19 @@ if __name__ == "__main__":
     available_months = available_data(
         df_mail_order, df_mail_service, df_correspondence, df_vak
     )
-    logging.info(f"Available months: {available_months}")
-    logging.info("Inserting data into database...")
 
+    logging.info("Computing KPIs...")
     update_month = list(set(available_months) & set(month_missing_kpis))
-
     if not update_month:
         logging.info("No data to update in the database.")
         exit(0)
 
-    logging.info(f"Upsert data for months: {update_month}")
+    logging.info("Inserting data into database...")
     upsert_mail_order(t, df_mail_order, update_month)
     upsert_mail_service(t, df_mail_service, update_month)
     upsert_correspondence(t, df_correspondence, update_month)
     upsert_vak(t, df_vak, update_month)
+
+    logging.info("Moving files to archive...")
+    move_files(t, sources, input_dirs, archive_dirs, file_names)
+    logging.info("Process completed successfully.")

@@ -70,20 +70,3 @@ def remove_timeinterval(timeinterval: str) -> datetime:
         res += t + "-"
 
     return res[:-1]
-
-
-import math
-
-
-def round_up(n, decimals=0):
-    """
-    Round up a number to a specified number of decimal places.
-
-    Args:
-        n (float): The number to be rounded up.
-        decimals (int, optional): The number of decimal places to round up to. Defaults to 0.
-
-    Returns:
-        float: The rounded up number.
-    """
-    return math.ceil(n * 10**decimals) / (10**decimals)

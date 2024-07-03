@@ -1,4 +1,6 @@
 from datetime import datetime
+import time
+import os
 from typing import List
 import logging
 
@@ -163,4 +165,25 @@ def available_data(
         and month in vak_months
     ]
 
+    logging.info(f"Available months: {available_months}")
     return available_months
+
+
+def move_files(
+    t: datetime, sources: dict, input_dirs: dict, archive_dirs: dict, file_names: dict
+):
+    prefix = "archive_" + t.strftime("%d_%m_%Y") + "_"
+
+    for source in sources:
+        file_name = find_matching_file(input_dirs[source], file_names[source])
+        input_file = os.path.join(input_dirs[source], file_name)
+        archive_file = os.path.join(archive_dirs[source], prefix + file_name)
+        try:
+            if os.path.exists(archive_file):
+                base, extension = os.path.splitext(archive_file)
+                archive_file = f"{base}_{int(time.time())}{extension}"
+            os.rename(input_file, archive_file)
+        except Exception as e:
+            logging.error(f"Could not move file {input_file} to {archive_file}: {e}")
+            exit(1)
+    logging.info(f"Moved file {input_file} to {archive_file}")
