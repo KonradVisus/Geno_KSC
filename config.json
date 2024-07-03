@@ -1,0 +1,36 @@
+{
+    "SERVER": "DESKTOP-N3GBCK8\\TEST2",
+    "DATABASE": "test",
+    "AUTHENTICATION": {
+        "USERNAME": "SA",
+        "PASSWORD": "lucasrachner123!"
+    },
+    "INPUT_DIRS": {
+        "Mail Order": "./input/input_mail_order",
+        "Mail Service": "./input/input_mail_service",
+        "Kunden Korrespondenz": "./input/input_kunden_korrespondenz",
+        "VAK": "./input/input_vak"
+    },
+    "ARCHIVE_DIRS": {
+        "Mail Order": "./archive/archive_mail_order",
+        "Mail Service": "./archive/archive_mail_service",
+        "Kunden Korrespondenz": "./archive/archive_kunden_korrespondenz",
+        "VAK": "./archive/archive_vak"
+    },
+    "FILE_NAMES": {
+        "Mail Order": "schriftliche Aufträge_Mail Order",
+        "Mail Service": "schriftliche Aufträge_Mail Service",
+        "Kunden Korrespondenz": "schriftliche Aufträge_Kundenkorrespondenz",
+        "VAK": "KSC_VAK"
+    },
+    "TABLE_NAMES": {
+        "Mail Order": "KSC_Mail_Order",
+        "Mail Service": "KSC_Mail_Service",
+        "Kunden Korrespondenz": "KSC_Kunden_Korrespondenz",
+        "VAK": "KSC_VAK",
+        "KPIS": "KSC_KPIs"
+    },
+    "PARAMETER": {
+        "BZ": 5
+    }
+}
